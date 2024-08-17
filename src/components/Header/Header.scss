@@ -1,0 +1,46 @@
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/fonts' as *;
+@use '../../styles/partials/mixins' as *;
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $black;
+    height: 72px;
+
+    &__div-right{
+        display: flex;
+        align-items: center;
+        padding-right: 1.5rem;
+        gap: 50px;
+    }
+}
+
+.logo{
+    width: 72px;
+    height: 72px;
+    border-radius: 0 25px 25px 0;
+    background-color: $purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__image{
+        cursor: pointer;
+    }
+}
+
+.mode{
+    &__image{
+        cursor: pointer;
+    }
+}
+
+.profile{
+
+    &__image{
+        width: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+}
