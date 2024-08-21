@@ -11,18 +11,51 @@
     &__buttons{
         display: flex;
         align-items: center;
+        gap: 1.5rem;
+    }
+
+    &__header{
+        @include spartanFont(24px, bold);
+    }
+    &__subheader{
+        @include spartanFont(13px, medium);
+        color: $grey;
     }
 }
 
 .buttons{
-    &__new{
-        @include purpleButton;
+    &__filter{
         display: flex;
+        align-items: center;
+        &--text{
+            @include spartanFont(15px, bold);
+            margin-right: 12px;
+        }
+    }
+    &__new{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        @include purpleButton;
+
+        &--text{
+            @include spartanFont(15px, bold);
+            color: white;
+            margin-top: 4px;
+        }
     }
     &__plus{
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background-color: white;
+        width: 10px;
+        height: 10px;
+        &--div{
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 6px;
+        }
     }
 }
