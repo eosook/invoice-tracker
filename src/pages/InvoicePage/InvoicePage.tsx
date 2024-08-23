@@ -8,7 +8,12 @@ export default function InvoiceList(){
         <main className="invoice-list">
             <InvoiceHeader />
             {/* <EmptyInvoiceList /> */}
-            <Invoice />
+            <Invoice id={"RT3080"} name={"Jensen Huang"} date={"19 Aug 2021"} amount={1800.90} status={"paid"}/>
+            <Invoice id={"RT3080"} name={"Jensen Huang"} date={"19 Aug 2021"} amount={1800.90} status={"pending"}/>
+            <Invoice id={"RT3080"} name={"Jensen Huang"} date={"19 Aug 2021"} amount={1800.90} status={"paid"}/>
+            <Invoice id={"RT3080"} name={"Jensen Huang"} date={"19 Aug 2021"} amount={1800.90} status={"paid"}/>
+            <Invoice id={"RT3080"} name={"Jensen Huang"} date={"19 Aug 2021"} amount={1800.90} status={"pending"}/>
+            <Invoice id={"RT3080"} name={"Jensen Huang"} date={"19 Aug 2021"} amount={1800.90} status={"paid"}/>
         </main>
     )
 }

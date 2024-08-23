@@ -40,12 +40,10 @@
     }
 
     &__status{
-        color: $status-green;
 
         &-section{
             width: 104px;
             height: 40px;
-            background-color: rgba($status-green, 0.1);
             border-radius: 4px;
             display: flex;
             justify-content: center;
@@ -53,11 +51,35 @@
             gap: 8px;
         }
 
-        &-dot{
+        &-green{
             width: 8px;
             height: 8px;
             background-color: $status-green;
             border-radius: 50%;
         }
+
+        &-orange{
+            width: 8px;
+            height: 8px;
+            background-color: $status-orange;
+            border-radius: 50%;
+        }
+
+        &-header{
+            @include spartanFont(0.9375rem, bold, none, -0.25px);
+            text-transform: capitalize;
+        }
+
+        &-paid{
+            background-color: rgba($status-green, 0.1);
+            color: $status-green;
+        }
+
+        &-pending{
+            background-color: rgba($status-orange, 0.1);
+            color: $status-orange;
+        }
     }
+
+
 }
