@@ -1,0 +1,34 @@
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/fonts' as *;
+
+.emptyInvoice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6.375rem;
+
+    &__image{
+        width: 193px;
+        height: 160px;
+    }
+
+    &__text{
+        margin-top: 2.625rem;
+        text-align: center;
+        width: 207px;
+    }
+
+    &__header{
+        @include spartanFont(1.5rem, bold, $black-hover, -0.75px);
+    }
+
+    &__subheader{
+        @include spartanFont(0.8125rem, 500, $grey, -0.1px);
+        margin-top: 1.4375rem;
+    }
+
+    &--new{
+        font-weight: bold;
+    }
+}

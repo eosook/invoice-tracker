@@ -15,10 +15,10 @@
     }
 
     &__header{
-        @include spartanFont(24px, bold);
+        @include spartanFont(1.5rem, bold, black, -0.75px);
     }
     &__subheader{
-        @include spartanFont(13px, medium);
+        @include spartanFont(0.8125rem, medium, black, -0.1px);
         color: $grey;
     }
 }
@@ -28,7 +28,7 @@
         display: flex;
         align-items: center;
         &--text{
-            @include spartanFont(15px, bold);
+            @include spartanFont(0.9375rem, bold, black, -0.25px);
             margin-right: 12px;
         }
     }
@@ -39,8 +39,7 @@
         @include purpleButton;
 
         &--text{
-            @include spartanFont(15px, bold);
-            color: white;
+            @include spartanFont(0.9375rem, bold, white, -0.25px);
             margin-top: 4px;
         }
     }
