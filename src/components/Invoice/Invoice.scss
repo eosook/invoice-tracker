@@ -1,0 +1,63 @@
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/fonts' as *;
+
+.invoice{
+    margin: 1rem 1.5rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: white;
+
+    &--hashtag{
+        color: $font-blue;
+    }
+
+    &__top-section{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__header{
+        @include invoiceHeader;
+    }
+
+    &__subheader{
+        @include invoiceSubheader;
+    }
+
+    &__bottom-section{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1.5rem;
+    }
+
+    &__info-section{
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    &__status{
+        color: $status-green;
+
+        &-section{
+            width: 104px;
+            height: 40px;
+            background-color: rgba($status-green, 0.1);
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        &-dot{
+            width: 8px;
+            height: 8px;
+            background-color: $status-green;
+            border-radius: 50%;
+        }
+    }
+}

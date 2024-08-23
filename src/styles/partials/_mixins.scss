@@ -1,14 +1,6 @@
 @use './colors' as *;
 @use './fonts' as *;
 
-@mixin spartanFont($size, $weight, $color, $spacing){
-    font-family: $primary-font;
-    font-weight: $weight;
-    font-size: $size;
-    letter-spacing: $spacing;
-    color: $color;
-}
-
 @mixin purpleButton(){
     background-color: $purple;
     width: 90px;

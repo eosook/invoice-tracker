@@ -1,6 +1,32 @@
+@use './colors' as *;
+
 @font-face{
     font-family: League Spartan;
     src: url("../../assets/fonts/LeagueSpartan-VariableFont_wght.ttf");
 }
 
 $primary-font: League Spartan, Arial, Helvetica, sans-serif;
+
+@mixin spartanFont($size, $weight, $color, $spacing){
+    font-family: $primary-font;
+    font-weight: $weight;
+    font-size: $size;
+    letter-spacing: $spacing;
+    color: $color;
+}
+
+@mixin header{
+    @include spartanFont(1.5rem, bold, $black-hover, -0.75px);
+}
+
+@mixin subheader{
+    @include spartanFont(0.8125rem, 500, $grey, -0.1px);
+}
+
+@mixin invoiceHeader{
+    @include spartanFont(0.9375rem, bold, $black-hover, -0.25px);
+}
+
+@mixin invoiceSubheader{
+    @include spartanFont(0.8125rem, 500, $subheader-grey, -0.1px);
+}

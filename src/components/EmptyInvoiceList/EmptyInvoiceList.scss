@@ -20,7 +20,7 @@
     }
 
     &__header{
-        @include spartanFont(1.5rem, bold, $black-hover, -0.75px);
+        @include header;
     }
 
     &__subheader{
