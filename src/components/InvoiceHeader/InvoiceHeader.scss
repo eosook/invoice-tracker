@@ -16,10 +16,17 @@
 
     &__header{
         @include spartanFont(1.5rem, bold, black, -0.75px);
+
+        &--dark{
+            color: white;
+        }
     }
     &__subheader{
-        @include spartanFont(0.8125rem, medium, black, -0.1px);
-        color: $grey;
+        @include spartanFont(0.8125rem, medium, $grey, -0.1px);
+
+        &--dark{
+            color: $grey-light;
+        }
     }
 }
 
@@ -30,6 +37,10 @@
         &--text{
             @include spartanFont(0.9375rem, bold, black, -0.25px);
             margin-right: 12px;
+        }
+
+        &--dark-text{
+            color: white;
         }
     }
     &__new{

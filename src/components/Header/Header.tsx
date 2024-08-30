@@ -3,10 +3,13 @@ import logo from "../../assets/images/favicon-32x32.png";
 import moon from "../../assets/images/icon-moon.svg";
 import sun from "../../assets/images/icon-sun.svg";
 import profile from "../../assets/images/image-avatar.jpg";
-import { useState } from "react";
 
-export default function Header() {
-  const [mode, setMode] = useState("light");
+type props = {
+  mode: string,
+  setMode: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function Header({mode, setMode}: props){
 
   const changeMode = () =>{
     if(mode === "light"){

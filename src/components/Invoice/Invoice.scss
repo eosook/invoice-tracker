@@ -8,6 +8,10 @@
     border-radius: 8px;
     background-color: white;
 
+    &--dark{
+        background-color: $darkblue-darker;
+    }
+
     &--hashtag{
         color: $font-blue;
     }
@@ -20,10 +24,18 @@
 
     &__header{
         @include invoiceHeader;
+
+        &--dark{
+            color: white;
+        }
     }
 
     &__subheader{
         @include invoiceSubheader;
+
+        &--dark{
+            color: $grey-light;
+        }
     }
 
     &__bottom-section{
@@ -80,6 +92,4 @@
             color: $status-orange;
         }
     }
-
-
 }
