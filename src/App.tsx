@@ -12,8 +12,8 @@ function App() {
     <BrowserRouter>
       <Header mode={mode} setMode={setMode}/>
       <Routes>
-        <Route path="/" element={<InvoicePage mode={mode}/>}></Route>
-        <Route path="/info" element={<InvoiceInfo/>}></Route>
+        <Route path="/" element={<InvoicePage mode={mode} />}></Route>
+        <Route path="/info" element={<InvoiceInfo mode={mode} />}></Route>
       </Routes>
     </BrowserRouter>
   )

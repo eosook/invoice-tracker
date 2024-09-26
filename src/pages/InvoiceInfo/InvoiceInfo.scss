@@ -1,160 +1,190 @@
-@use '../../styles/partials/colors' as *;
-@use '../../styles/partials/mixins' as *;
-@use '../../styles/partials/fonts' as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/fonts" as *;
 
-.info{
-    padding: 2rem 1.5rem;
-    background-color: $light-background;
-    height: 100%;
-    &__back{
-        display: flex;
-        align-items: center;
-        &-arrow{
-            height: 8px;
-        }
-        &-header{
-            @include invoiceHeader;
-            margin-left: 1.5rem;
-        }
-    }
-    
-    &-status{
-        background-color: white;
-        border-radius: 8px;
-        height: 91px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 2rem;
-        margin: 2rem 0 1rem;
+.info {
+  padding: 2rem 1.5rem 10rem;
+  background-color: $light-background;
+  height: 100%;
 
-        &__header{
-            @include invoiceSubheader;
-        }
+  &__back {
+    display: flex;
+    align-items: center;
 
-        &__box{
-            background-color: rgba($status-orange, 0.2);
-            height: 40px;
-            width: 104px;
-            border-radius: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        &__circle{
-            width: 8px;
-            height: 8px;
-            background-color: $status-orange;
-            border-radius: 50%;
-        }
-
-        &__status{
-            @include invoiceHeader;
-            color: $status-orange;
-        }
+    &:hover {
+      cursor: pointer;
     }
 
-    &-main{
-        background-color: white;
-        padding: 1.5rem;
-        border-radius: 8px;
-
-        &--black{
-            @include invoiceHeader;
-        }
-
-        &--grey{
-            @include invoiceSubheader;
-            line-height: 18px;
-        }
-
-        &--white{
-            @include invoiceSubheader;
-            line-height: 18px;
-            color: white;
-        }
-
-        &__subheader{
-            @include invoiceSubheader;
-            margin-bottom: 13px;
-        }
-
-        &__container{
-            margin-bottom: 2rem;
-        }
-
-        &--margin{
-            margin-bottom: 7px;
-        }
-
-        &__body{
-            &-top{
-                display: flex;
-                gap: 4rem;
-                margin-bottom: 2rem;
-            }
-        }
-
-        &__dates{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    &-arrow {
+      height: 8px;
+      margin-bottom: 2px;
     }
 
-    &__buttons{
-        height: 91px;
-        width: 100%;
-        background-color: white;
-        position: fixed;
-        bottom: 0;
-        display: flex;
-        padding: 2rem;
-
-        &-edit{
-            background-color: $button-grey;
-        }
+    &-header {
+      @include invoiceHeader;
+      margin-left: 1.5rem;
     }
-}
+  }
 
-.charge{
-    margin: 2rem 0;
-    background-color: $button-grey;
+  &-status {
+    background-color: white;
+    border-radius: 8px;
+    height: 91px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    margin: 2rem 0 1rem;
+
+    &__header {
+      @include invoiceSubheader;
+    }
+
+    &__box {
+      background-color: rgba($status-orange, 0.1);
+      height: 40px;
+      width: 104px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    &__circle {
+      width: 8px;
+      height: 8px;
+      background-color: $status-orange;
+      border-radius: 50%;
+    }
+
+    &__status {
+      @include invoiceHeader;
+      color: $status-orange;
+    }
+  }
+
+  &-main {
+    background-color: white;
+    padding: 1.5rem;
     border-radius: 8px;
 
-    &__single{
-        padding: 0 2rem 2rem;
+    &--black {
+      @include invoiceHeader;
+    }
+
+    &--grey {
+      @include invoiceSubheader;
+      line-height: 18px;
+    }
+
+    &--white {
+      @include invoiceSubheader;
+      line-height: 18px;
+      color: white;
+    }
+
+    &__subheader {
+      @include invoiceSubheader;
+      margin-bottom: 13px;
+    }
+
+    &__container {
+      margin-bottom: 2rem;
+    }
+
+    &--margin {
+      margin-bottom: 7px;
+    }
+
+    &__body {
+      &-top {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        &:first-child{
-            padding: 2rem;
-        }
+        gap: 4rem;
+        margin-bottom: 2rem;
+      }
     }
 
-    &__container{
-        
+    &__dates {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  &__dark {
+    background-color: $dark-background;
+
+    &--header {
+      color: white;
+    }
+    &--div{
+        background-color: $darkblue-darker;
+    }
+  }
+}
+
+.charge {
+  margin: 2rem 0 0;
+  background-color: $button-grey;
+  border-radius: 8px;
+
+  &__single {
+    padding: 0 2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:first-child {
+      padding: 2rem;
+    }
+  }
+
+  &__black {
+    @include invoiceHeader;
+  }
+
+  &__calculate {
+    @include invoiceHeader;
+    color: $font-blue;
+    margin-top: 0.5rem;
+  }
+
+  &__grand-total {
+    background-color: $black;
+    padding: 2.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    border-radius: 0 0 8px 8px;
+  }
+
+  &__dark{
+    &--div{
+        background-color: $darkblue;
     }
 
-    &__black{
-        @include invoiceHeader;
+    &--black{
+        background-color: $black-hover;
     }
 
-    &__calculate{
-        @include invoiceHeader;
-        color: $font-blue;
-        margin-top: 0.5rem;
-    }
-
-    &__grand-total{
-        background-color: $black;
-        padding: 2.5rem 2rem;
-        display: flex;
-        justify-content: space-between;
+    &--text{
         color: white;
-        border-radius: 0 0 8px 8px;
+    }
+  }
+}
+
+.buttons{
+    height: 91px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    padding: 2rem;
+
+    &-edit {
+      background-color: $button-grey;
     }
 }
