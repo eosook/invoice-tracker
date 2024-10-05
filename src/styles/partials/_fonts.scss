@@ -30,3 +30,7 @@ $primary-font: League Spartan, Arial, Helvetica, sans-serif;
 @mixin invoiceSubheader{
     @include spartanFont(0.8125rem, 500, $subheader-grey, -0.1px);
 }
+
+@mixin buttonfont{
+    @include spartanFont(0.9375rem, bold, white, -0.25px);
+}

@@ -83,10 +83,10 @@ export default function InvoiceInfo({mode}: InvoiceInfoProps) {
           </div>
         </div>
       </div>
-      <div className="buttons">
-        <button className="buttons--edit">Edit</button>
-        <button className="buttons--delete">Delete</button>
-        <button className="buttons--paid">Mark as Paid</button>
+      <div className={mode === "light" ? "buttons" : "buttons buttons--dark"}>
+        <button className={mode === "light" ? "buttons__button buttons--edit" : "buttons__button buttons--edit buttons--edit-dark"}>Edit</button>
+        <button className="buttons__button buttons--delete">Delete</button>
+        <button className="buttons__button buttons--paid">Mark as Paid</button>
       </div>
     </div>
   );
