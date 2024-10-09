@@ -1,0 +1,105 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/fonts" as *;
+
+.charge {
+  margin: 2rem 0 0;
+  background-color: $light-background;
+  border-radius: 8px;
+
+  &__single {
+    padding: 0 2rem 2rem;
+    display: flex;
+    align-items: center;
+
+    &:first-child {
+      @include tablet {
+        padding: 2rem;
+      }
+    }
+
+    &:nth-child(2) {
+      padding: 2rem;
+
+      @include tablet {
+        padding: 0 2rem 2rem;
+      }
+    }
+  }
+
+  &__name{
+    width: 276px;
+  }
+
+  &__quantity{
+    width: 118px;
+  }
+
+  &__price{
+    width: 137px;
+  }
+
+  &__data-name{
+    width: 286px;
+  }
+
+  &__categories {
+    display: none;
+
+    @include tablet {
+      display: flex;
+    }
+  }
+
+  &__black {
+    @include invoiceHeader;
+  }
+
+  &__grey {
+    @include invoiceSubheader;
+  }
+
+  &__data-grey{
+    @include invoiceSubheader;
+    font-weight: bold;
+    margin-left: 0.5rem;
+    display: none;
+
+    @include tablet{
+      display: block;
+    }
+  }
+
+  &__calculate {
+    @include invoiceHeader;
+    color: $font-blue;
+    margin-top: 0.5rem;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__grand-total {
+    background-color: $black;
+    padding: 2.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    border-radius: 0 0 8px 8px;
+  }
+
+  &__dark {
+    &--div {
+      background-color: $darkblue;
+    }
+
+    &--black {
+      background-color: $black-hover;
+    }
+
+    &--text {
+      color: white;
+    }
+  }
+}
