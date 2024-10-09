@@ -9,11 +9,27 @@
     background: $black;
     height: 72px;
 
+    @include tablet{
+        height: 80px;
+    }
+
+    @include desktop{
+        height: 100vh;
+        width: 103px;
+        position: fixed;
+        flex-direction: column;
+    }
+
     &__div-right{
         display: flex;
         align-items: center;
-        padding-right: 1.5rem;
         gap: 50px;
+
+        @include desktop{
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 0;
+        }
     }
 }
 
@@ -28,6 +44,16 @@
     &__image{
         cursor: pointer;
     }
+
+    @include tablet{
+        width: 80px;
+        height: 80px;
+    }
+
+    @include desktop{
+        width: 103px;
+        height: 103px;
+    }
 }
 
 .mode{
@@ -37,6 +63,22 @@
 }
 
 .profile{
+    border-left: 1px solid #494E6E;
+    padding: 0 1.5rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include tablet{
+        height: 80px;
+    }
+
+    @include desktop{
+        border-left: none;
+        border-top: 1px solid #494E6E;
+        width: 103px;
+    }
 
     &__image{
         width: 32px;

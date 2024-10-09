@@ -7,9 +7,22 @@
   background-color: $light-background;
   height: 100%;
 
+  @include desktop{
+    margin-left: 103px;
+  }
+
   &__back {
     display: flex;
     align-items: center;
+
+    @include tablet{
+      width: 688px;
+      margin: 0 auto;
+    }
+
+    @include desktop{
+      width: 730px;
+    }
 
     &:hover {
       cursor: pointer;
@@ -199,6 +212,7 @@
       height: 48px;
       color: white;
       border: none;
+      cursor: pointer;
 
       &:hover{
         transform: translate(0 , -5px);
