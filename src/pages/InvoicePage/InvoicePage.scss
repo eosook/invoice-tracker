@@ -5,6 +5,10 @@
 .invoice-list{
     background-color: $light-background;
     height: 100%;
+
+    @include desktop{
+        margin-left: 103px;
+    }
 }
 
 .invoice-list--dark{
