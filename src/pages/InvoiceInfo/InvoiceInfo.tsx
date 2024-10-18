@@ -1,8 +1,10 @@
 import "./InvoiceInfo.scss";
 import arrowLeft from "../../assets/images/icon-arrow-left.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import StatusBar from "../../components/StatusBar/StatusBar";
 import Charges from "../../components/Charges/Charges";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 type InvoiceInfoProps = {
   mode: string;
@@ -10,10 +12,23 @@ type InvoiceInfoProps = {
 
 export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
   const navigate = useNavigate();
+  const { id } = useParams();
+  console.log(id);
+
+  const [invoiceInfo, setInvoiceInfo] = useState([]);
 
   function toHome() {
     navigate("/");
   }
+
+  useEffect(() => {
+    const getInvoiceInfo = async () => {
+      const response = await axios.get('http://localhost:8080/invoices/' + id);
+      setInvoiceInfo(response.data);
+      console.log(response.data);
+    }
+    getInvoiceInfo();
+  }, [])
   return (
     <div className={mode === "light" ? "info" : "info info__dark"}>
       <div className="info__back" onClick={toHome}>

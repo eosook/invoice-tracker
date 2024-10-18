@@ -1,4 +1,5 @@
 import "./Invoice.scss";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     mode: string,
@@ -10,8 +11,20 @@ type Props = {
 }
 
 export default function Invoice({mode, id, name, date, amount, status}: Props) {
+  const navigate = useNavigate();
+
+  function toInvoiceInfo(id:string){
+    navigate(`/info/` + id, 
+      {
+        state: {
+          id: id
+        }
+      }
+    );
+  }
+
   return (
-    <div className={mode === "light" ? "invoice" : "invoice invoice--dark"}>
+    <div className={mode === "light" ? "invoice" : "invoice invoice--dark"} onClick={() => toInvoiceInfo(id)}>
       <div className="invoice__top-section">
         <h2 className={mode === "light" ? "invoice__header" : "invoice__header invoice__header--dark"}>
           <span className="invoice--hashtag">#</span>{id}

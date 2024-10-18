@@ -4,7 +4,6 @@ import InvoiceHeader from '../../components/InvoiceHeader/InvoiceHeader';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import './InvoicePage.scss'
-import { StringOptionsWithImporter } from 'sass';
 
 type InvoiceListProps = {
     mode: string
