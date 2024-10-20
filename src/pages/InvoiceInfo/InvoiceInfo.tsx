@@ -13,9 +13,8 @@ type InvoiceInfoProps = {
 export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
 
-  const [invoiceInfo, setInvoiceInfo] = useState([]);
+  const [invoiceInfo, setInvoiceInfo] = useState<any[]>([]);
 
   function toHome() {
     navigate("/");
@@ -24,8 +23,8 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
   useEffect(() => {
     const getInvoiceInfo = async () => {
       const response = await axios.get('http://localhost:8080/invoices/' + id);
-      setInvoiceInfo(response.data);
-      console.log(response.data);
+      setInvoiceInfo(response.data[0]);
+      console.log(response.data[0]);
     }
     getInvoiceInfo();
   }, [])
@@ -56,15 +55,15 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
                   : "info-main--black info__dark--header"
               }
             >
-              #XM9141
+              #{id}
             </h2>
-            <h4 className="info-main--grey">Graphic Design</h4>
+            <h4 className="info-main--grey">{invoiceInfo.description}</h4>
           </div>
           <div className="info-main__container">
-            <h4 className="info-main--grey">19 Union Terrace</h4>
-            <h4 className="info-main--grey">London</h4>
-            <h4 className="info-main--grey">E1 3EZ</h4>
-            <h4 className="info-main--grey">United Kingdom</h4>
+            <h4 className="info-main--grey">{invoiceInfo.senderaddress_street}</h4>
+            <h4 className="info-main--grey">{invoiceInfo.senderaddress_city}</h4>
+            <h4 className="info-main--grey">{invoiceInfo.senderaddress_postCode}</h4>
+            <h4 className="info-main--grey">{invoiceInfo.senderaddress_country}</h4>
           </div>
         </div>
         <div className="info-main__body">
@@ -79,7 +78,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
                       : "info-main--black info__dark--header"
                   }
                 >
-                  21 Aug 2021
+                  {invoiceInfo.createdAt}
                 </h2>
               </div>
               <div className="info-main__payment-due">
@@ -91,7 +90,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
                       : "info-main--black info__dark--header"
                   }
                 >
-                  20 Sep 2021
+                  {invoiceInfo.paymentDue}
                 </h2>
               </div>
             </div>
@@ -104,12 +103,12 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
                     : "info-main--black info-main--margin info__dark--header"
                 }
               >
-                Alex Grim
+                {invoiceInfo.clientName}
               </h2>
-              <h4 className="info-main--grey">84 Church Way</h4>
-              <h4 className="info-main--grey">Bradford</h4>
-              <h4 className="info-main--grey">BD1 9PB</h4>
-              <h4 className="info-main--grey">United Kingdom</h4>
+              <h4 className="info-main--grey">{invoiceInfo.clientaddress_street}</h4>
+              <h4 className="info-main--grey">{invoiceInfo.clientaddress_city}</h4>
+              <h4 className="info-main--grey">{invoiceInfo.clientaddress_postCode}</h4>
+              <h4 className="info-main--grey">{invoiceInfo.clientaddress_country}</h4>
             </div>
             <div className="info-main__email">
               <h4 className="info-main__subheader">Sent to</h4>
@@ -120,7 +119,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
                     : "info-main--black info__dark--header"
                 }
               >
-                alexgrim@mail.com
+                {invoiceInfo.clientEmail}
               </h2>
             </div>
           </div>
