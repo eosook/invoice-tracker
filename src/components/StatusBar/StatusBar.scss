@@ -1,3 +1,101 @@
 @use "../../styles/partials/colors" as *;
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/fonts" as *;
+
+.info {
+  &-status {
+    background-color: white;
+    border-radius: 8px;
+    height: 91px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    margin: 2rem auto 1rem;
+
+    @include tablet {
+      max-width: 688px;
+    }
+
+    @include desktop {
+      max-width: 730px;
+    }
+
+    &__header {
+      @include invoiceSubheader;
+    }
+
+    &__div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      @include tablet {
+        justify-content: left;
+        align-items: center;
+        gap: 1.25rem;
+      }
+    }
+
+    &__box {
+      height: 40px;
+      width: 104px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+
+      &--orange{
+        background-color: rgba($status-orange, 0.1);
+      }
+
+      &--green{
+        background-color: rgba($status-green, 0.1);
+      }
+    }
+
+    &__circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      &--orange{
+        background-color: $status-orange;
+      }
+      &--green{
+        background-color: $status-green;
+      }
+    }
+
+    &__status {
+      @include invoiceHeader;
+      &--orange{
+        color: $status-orange;
+      }
+      &--green{
+        color: $status-green;
+      }
+    }
+
+    &__buttons {
+      display: none;
+
+      @include tablet {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+  }
+
+  &__dark {
+    background-color: $dark-background;
+
+    &--header {
+      color: white;
+    }
+    &--div{
+        background-color: $darkblue-darker;
+    }
+  }
+}

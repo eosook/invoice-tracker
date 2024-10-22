@@ -14,9 +14,9 @@ export default function StatusBar({ mode, status }: StatusBarProps) {
     >
       <div className="info-status__div">
         <h4 className="info-status__header">Status</h4>
-        <div className="info-status__box">
-          <div className="info-status__circle"></div>
-          <h3 className="info-status__status">{status}</h3>
+        <div className={status == "pending" ? "info-status__box info-status__box--orange": "info-status__box info-status__box--green"}>
+          <div className={status == "pending" ? "info-status__circle info-status__circle--orange": "info-status__circle info-status__circle--green"}></div>
+          <h3 className={status == "pending" ? "info-status__status info-status__status--orange": "info-status__status info-status__status--green"}>{status}</h3>
         </div>
       </div>
       <div className="info-status__buttons">
