@@ -1,10 +1,11 @@
 import "./StatusBar.scss";
 
 type StatusBarProps = {
-  mode: string;
+  mode: string,
+  status: string
 };
 
-export default function StatusBar({ mode }: StatusBarProps) {
+export default function StatusBar({ mode, status }: StatusBarProps) {
   return (
     <div
       className={
@@ -15,7 +16,7 @@ export default function StatusBar({ mode }: StatusBarProps) {
         <h4 className="info-status__header">Status</h4>
         <div className="info-status__box">
           <div className="info-status__circle"></div>
-          <h3 className="info-status__status">Pending</h3>
+          <h3 className="info-status__status">{status}</h3>
         </div>
       </div>
       <div className="info-status__buttons">

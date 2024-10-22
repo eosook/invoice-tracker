@@ -42,7 +42,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
           Go back
         </h2>
       </div>
-      <StatusBar mode={mode} />
+      <StatusBar mode={mode} status={invoiceInfo.status}/>
       <div
         className={mode === "light" ? "info-main" : "info-main info__dark--div"}
       >
