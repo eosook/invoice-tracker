@@ -70,6 +70,7 @@
 
     &__status {
       @include invoiceHeader;
+      text-transform: capitalize;
       &--orange{
         color: $status-orange;
       }
