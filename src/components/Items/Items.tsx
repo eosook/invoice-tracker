@@ -7,16 +7,28 @@ type ItemsProps = {
     invoiceId: string
 }
 
+interface item{
+  id: number,
+  invoiceId: string,
+  name: string,
+  price: number,
+  quantity: number,
+  total: number
+}
+
 export default function Items({ mode, invoiceId }: ItemsProps){
-  const [items, setItems] = useState<string[]>([])
+  const [items, setItems] = useState<item[]>([])
+  const [grandTotal, setGrandTotal] = useState<number>(0);
+  var total = 0;
 
   useEffect(() => {
     const getItems = async () => {
       const response = await axios.get('http://localhost:8080/items/' + invoiceId);
       setItems(response.data);
+      console.log(response.data);
     }
     getItems();
-  }, [])
+  }, [invoiceId])
     return (
         <div
           className={mode === "light" ? "item" : "item item__dark--div"}
@@ -27,56 +39,34 @@ export default function Items({ mode, invoiceId }: ItemsProps){
             <h3 className="item__grey item__price">Price</h3>
             <h3 className="item__grey item__total">Total</h3>
           </div>
-          <div className="item__single">
-            <div className="item__container">
+          {items.map((item) => {
+            total += item.price;
+            return(<div className="item__single">
+              <div className="item__container">
+                <h2
+                  className={
+                    mode === "light"
+                      ? "item__black item__name"
+                      : "item__black item__name item__dark--text"
+                  }
+                >
+                  {item.name}
+                </h2>
+                <h4 className="item__calculate">{item.quantity + " X $" + item.price + ".00"}</h4>
+              </div>
+              <h3 className="item__data-grey item__quantity">{item.quantity}</h3>
+              <h3 className="item__data-grey item__price">{"$" + item.price + ".00"}</h3>
               <h2
                 className={
                   mode === "light"
-                    ? "item__black item__name"
-                    : "item__black item__name item__dark--text"
+                    ? "item__black"
+                    : "item__black item__dark--text"
                 }
               >
-                Banner Design
+                {item.price}
               </h2>
-              <h4 className="item__calculate">1 x $156.00</h4>
-            </div>
-            <h3 className="item__data-grey item__quantity">1</h3>
-            <h3 className="item__data-grey item__price">$156.00</h3>
-            <h2
-              className={
-                mode === "light"
-                  ? "item__black"
-                  : "item__black item__dark--text"
-              }
-            >
-              $156.00
-            </h2>
-          </div>
-          <div className="item__single">
-            <div className="item__container">
-              <h2
-                className={
-                  mode === "light"
-                    ? "item__black item__name"
-                    : "item__black item__name item__dark--text"
-                }
-              >
-                Email Design
-              </h2>
-              <h4 className="item__calculate">2 x $200.00</h4>
-            </div>
-            <h3 className="item__data-grey item__quantity">2</h3>
-            <h3 className="item__data-grey item__price">$200.00</h3>
-            <h2
-              className={
-                mode === "light"
-                  ? "item__black item__total"
-                  : "item__black item__total item__dark--text"
-              }
-            >
-              $400.00
-            </h2>
-          </div>
+            </div>)
+          })}
           <div
             className={
               mode === "light"
@@ -85,7 +75,7 @@ export default function Items({ mode, invoiceId }: ItemsProps){
             }
           >
             <h3 className="info-main--white">Amount Due</h3>
-            <h2 className="item__total-price">$556.00</h2>
+            <h2 className="item__total-price">{"$" + total}</h2>
           </div>
         </div>
     )
