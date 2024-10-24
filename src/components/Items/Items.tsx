@@ -17,8 +17,7 @@ interface item{
 }
 
 export default function Items({ mode, invoiceId }: ItemsProps){
-  const [items, setItems] = useState<item[]>([])
-  const [grandTotal, setGrandTotal] = useState<number>(0);
+  const [items, setItems] = useState<item[]>([]);
   var total = 0;
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function Items({ mode, invoiceId }: ItemsProps){
             <h3 className="item__grey item__total">Total</h3>
           </div>
           {items.map((item) => {
-            total += item.price;
+            total += Number(item.price);
             return(<div className="item__single">
               <div className="item__container">
                 <h2
@@ -52,15 +51,15 @@ export default function Items({ mode, invoiceId }: ItemsProps){
                 >
                   {item.name}
                 </h2>
-                <h4 className="item__calculate">{item.quantity + " X $" + item.price + ".00"}</h4>
+                <h4 className="item__calculate">{item.quantity + " X $" + item.price}</h4>
               </div>
               <h3 className="item__data-grey item__quantity">{item.quantity}</h3>
-              <h3 className="item__data-grey item__price">{"$" + item.price + ".00"}</h3>
+              <h3 className="item__data-grey item__price">{"$" + item.price}</h3>
               <h2
                 className={
                   mode === "light"
-                    ? "item__black"
-                    : "item__black item__dark--text"
+                    ? "item__black item__total"
+                    : "item__black item__dark--text item__total"
                 }
               >
                 {item.price}

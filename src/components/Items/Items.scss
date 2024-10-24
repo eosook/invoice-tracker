@@ -11,6 +11,11 @@
     padding: 0 2rem 2rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    @include tablet{
+      justify-content: left;
+    }
 
     &:first-child {
       @include tablet {
@@ -28,27 +33,20 @@
   }
 
   &__name{
-    width: 276px;
+    width: 280px;
   }
 
   &__quantity{
-    width: 118px;
+    width: 50px;
   }
 
   &__price{
-    width: 137px;
+    width: 120px;
+    text-align: right;
   }
 
-  &__data-name{
-    width: 286px;
-  }
-
-  &__categories {
-    display: none;
-
-    @include tablet {
-      display: flex;
-    }
+  &__total{
+    margin-left: auto;
   }
 
   &__black {
