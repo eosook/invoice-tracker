@@ -40,9 +40,9 @@ export default function InvoiceList({mode}:InvoiceListProps){
             <main className={mode === "light" ? "invoice-list" : "invoice-list invoice-list--dark"}>
             <InvoiceHeader mode={mode}/>
             
-            {invoicesList.map((invoice) => {
+            {invoicesList.map((invoice, index) => {
                 return (
-                    <Invoice mode={mode} id={invoice.invoiceId} name={invoice.clientName} date={invoice.createdAt} amount={invoice.total} status={invoice.status}/>
+                    <Invoice mode={mode} key={index} id={invoice.invoiceId} name={invoice.clientName} date={invoice.createdAt} amount={invoice.total} status={invoice.status}/>
                 )
             })}
         </main>

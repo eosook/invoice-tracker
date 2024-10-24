@@ -24,7 +24,6 @@ export default function Items({ mode, invoiceId }: ItemsProps){
     const getItems = async () => {
       const response = await axios.get('http://localhost:8080/items/' + invoiceId);
       setItems(response.data);
-      console.log(response.data);
     }
     getItems();
   }, [invoiceId])
