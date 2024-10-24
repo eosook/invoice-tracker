@@ -32,21 +32,37 @@
     }
   }
 
+  &__categories{
+    display: none;
+
+    @include tablet{
+      display: flex;
+    }
+  }
+
   &__name{
-    width: 280px;
+    @include tablet{
+      width: 280px;
+    }
   }
 
   &__quantity{
-    width: 50px;
+    @include tablet{
+      width: 50px;
+    }
   }
 
   &__price{
-    width: 120px;
-    text-align: right;
+    @include tablet{
+      width: 120px;
+      text-align: right;
+    }
   }
 
   &__total{
-    margin-left: auto;
+    @include tablet{
+      margin-left: auto;
+    }
   }
 
   &__black {
