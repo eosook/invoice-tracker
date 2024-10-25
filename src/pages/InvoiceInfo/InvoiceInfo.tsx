@@ -5,6 +5,7 @@ import StatusBar from "../../components/StatusBar/StatusBar";
 import Charges from "../../components/Items/Items";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import EditInvoice from "../../modals/EditInvoice/EditInvoice";
 
 type InvoiceInfoProps = {
   mode: string;
@@ -193,6 +194,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
         <button className="buttons__button buttons--delete">Delete</button>
         <button className="buttons__button buttons--paid">Mark as Paid</button>
       </div>
+      <EditInvoice mode={mode} invoiceData={invoiceInfo}/>
     </div>
   );
 }

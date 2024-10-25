@@ -1,0 +1,53 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/fonts" as *;
+
+.edit{
+    &__subheader{
+        @include invoiceSubheader;
+
+        &--purple{
+            @include invoiceHeader;
+            color: $purple;
+            margin: 1.5rem 0;
+        }
+    }
+
+    &__div{
+        &--single{
+
+        }
+
+        &--multi{
+            display: flex;
+            flex-wrap: wrap;
+
+            :first-child{
+                margin-right: 1.5rem;
+            }
+        }
+    }
+
+    &__multi-entry{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__single-entry{
+        width: calc((100% - 1.5rem)/2);
+
+        &--country{
+            width: 100%;
+        }
+    }
+
+    &__textarea{
+        resize: none;
+        border-radius: 4px;
+        border: 1px solid $grey-light;
+        margin: 0.5rem 0 1.5rem;
+        height: 48px;
+        padding: 1rem 1.25rem;
+        width: 100%;
+    }
+}
