@@ -1,4 +1,6 @@
 import "./EditInvoice.scss";
+import calenderImage from "../../assets/images/icon-calendar.svg";
+import arrowDown from "../../assets/images/icon-arrow-down.svg";
 
 interface EditInvoiceProps {
   mode: string;
@@ -57,6 +59,29 @@ export default function EditInvoice({ mode, invoiceData }: EditInvoiceProps) {
             <h2 className="edit__subheader">Country</h2>
             <textarea className="edit__textarea edit__textarea--country" />
           </div>
+        </div>
+        <div className="edit__div--single">
+          <h2 className="edit__subheader">Invoice Date</h2>
+          <div className="edit__calender">
+            <input type="text" className="edit__calender-input" />
+            <img className="edit__calender-image" src={calenderImage}></img>
+          </div>
+        </div>
+        <div className="edit__div--single">
+          <h2 className="edit__subheader">Payment Terms</h2>
+          <div className="edit__select-div">
+            <select className="edit__select">
+              <option value={30}>Net 30 Days</option>
+              <option value={60}>Net 60 Days</option>
+              <option value={90}>Net 90 Days</option>
+              <option value={365}>Net 1 Year</option>
+            </select>
+            <img className="edit__select-image" src={arrowDown}></img>
+          </div>
+        </div>
+        <div className="edit__div--single">
+          <h2 className="edit__subheader">Project Description</h2>
+          <textarea className="edit__textarea" />
         </div>
       </div>
     </div>
