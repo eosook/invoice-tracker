@@ -194,7 +194,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
         <button className="buttons__button buttons--delete">Delete</button>
         <button className="buttons__button buttons--paid">Mark as Paid</button>
       </div>
-      <EditInvoice mode={mode} invoiceData={invoiceInfo}/>
+      <EditInvoice mode={mode} invoiceInfo={invoiceInfo} setInvoiceInfo={setInvoiceInfo}/>
     </div>
   );
 }
