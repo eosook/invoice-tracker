@@ -3,6 +3,9 @@
 @use "../../styles/partials/fonts" as *;
 
 .edit{
+    &__header{
+        @include header;
+    }
     &__subheader{
         @include invoiceSubheader;
 
@@ -10,6 +13,21 @@
             @include invoiceHeader;
             color: $purple;
             margin: 1.5rem 0;
+        }
+
+        &--grey{
+            @include invoiceHeader;
+            font-size: 18px;
+            line-height: 32px;
+            letter-spacing: -0.38px;
+            margin-bottom: 1.5rem;
+            color: $grey;
+        }
+    }
+
+    &__span{
+        &-grey{
+            color: $grey;
         }
     }
 
@@ -101,5 +119,38 @@
             right: 2.5rem;
             margin-bottom: 1rem;
         }
+    }
+
+    &__items{
+        &-single{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        &-name{
+            width: 100%;
+        }
+
+        &-quantity{
+            width: 64px;
+        }
+
+        &-price{
+            width: 100px;
+        }
+
+        &-total{
+            @include invoiceSubheader;
+            border: none;
+            padding: 1rem 0;
+        }
+    }
+
+    &__image{
+        width: 12px;
+        height: 16px;
+        margin: 0 1rem 0.55rem auto;
     }
 }

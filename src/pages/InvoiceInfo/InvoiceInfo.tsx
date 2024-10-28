@@ -2,10 +2,10 @@ import "./InvoiceInfo.scss";
 import arrowLeft from "../../assets/images/icon-arrow-left.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import StatusBar from "../../components/StatusBar/StatusBar";
-import Charges from "../../components/Items/Items";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import EditInvoice from "../../modals/EditInvoice/EditInvoice";
+import Items from "../../components/Items/Items";
 
 type InvoiceInfoProps = {
   mode: string;
@@ -31,9 +31,19 @@ interface invoice {
   senderaddress_street: string;
 }
 
+interface item{
+  id: number,
+  invoiceId: string,
+  name: string,
+  price: number,
+  quantity: number,
+  total: number
+}
+
 export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [items, setItems] = useState<item[]>([]);
 
   const [invoiceInfo, setInvoiceInfo] = useState<invoice>({
     invoiceId: "",
@@ -66,6 +76,17 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
     };
     getInvoiceInfo();
   }, []);
+
+  useEffect(() => {
+    if (invoiceInfo.invoiceId){
+      const getItems = async () => {
+        const response = await axios.get('http://localhost:8080/items/' + invoiceInfo.invoiceId);
+        setItems(response.data);
+      }
+      getItems();
+    }
+  }, [invoiceInfo.invoiceId])
+
   return (
     <div className={mode === "light" ? "info" : "info info__dark"}>
       <div className="info__back" onClick={toHome}>
@@ -178,7 +199,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
             </div>
           </div>
         </div>
-        <Charges mode={mode} invoiceId={invoiceInfo.invoiceId} />
+        <Items mode={mode} items={items} />
       </div>
 
       <div className={mode === "light" ? "buttons" : "buttons buttons--dark"}>
@@ -194,7 +215,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
         <button className="buttons__button buttons--delete">Delete</button>
         <button className="buttons__button buttons--paid">Mark as Paid</button>
       </div>
-      <EditInvoice mode={mode} invoiceInfo={invoiceInfo} setInvoiceInfo={setInvoiceInfo}/>
+      <EditInvoice mode={mode} invoiceInfo={invoiceInfo} setInvoiceInfo={setInvoiceInfo} items={items} setItems={setItems}/>
     </div>
   );
 }
