@@ -1,11 +1,11 @@
 import "./InvoiceInfo.scss";
-import arrowLeft from "../../assets/images/icon-arrow-left.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import StatusBar from "../../components/StatusBar/StatusBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import EditInvoice from "../../modals/EditInvoice/EditInvoice";
 import Items from "../../components/Items/Items";
+import GoBack from "../../components/GoBack/GoBack";
 
 type InvoiceInfoProps = {
   mode: string;
@@ -31,20 +31,19 @@ interface invoice {
   senderaddress_street: string;
 }
 
-interface item{
-  id: number,
-  invoiceId: string,
-  name: string,
-  price: number,
-  quantity: number,
-  total: number
+interface item {
+  id: number;
+  invoiceId: string;
+  name: string;
+  price: number;
+  quantity: number;
+  total: number;
 }
 
 export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
-  const navigate = useNavigate();
   const { id } = useParams();
   const [items, setItems] = useState<item[]>([]);
-
+  const [editToggle, setEditToggle] = useState<boolean>(false);
   const [invoiceInfo, setInvoiceInfo] = useState<invoice>({
     invoiceId: "",
     createdAt: "",
@@ -65,8 +64,8 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
     senderaddress_street: "",
   });
 
-  function toHome() {
-    navigate("/");
+  function toggleEditModal() {
+    setEditToggle(!editToggle);
   }
 
   useEffect(() => {
@@ -78,29 +77,20 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
   }, []);
 
   useEffect(() => {
-    if (invoiceInfo.invoiceId){
+    if (invoiceInfo.invoiceId) {
       const getItems = async () => {
-        const response = await axios.get('http://localhost:8080/items/' + invoiceInfo.invoiceId);
+        const response = await axios.get(
+          "http://localhost:8080/items/" + invoiceInfo.invoiceId
+        );
         setItems(response.data);
-      }
+      };
       getItems();
     }
-  }, [invoiceInfo.invoiceId])
+  }, [invoiceInfo.invoiceId]);
 
   return (
     <div className={mode === "light" ? "info" : "info info__dark"}>
-      <div className="info__back" onClick={toHome}>
-        <img src={arrowLeft} className="info__back-arrow"></img>
-        <h2
-          className={
-            mode === "light"
-              ? "info__back-header"
-              : "info__back-header info__dark--header"
-          }
-        >
-          Go back
-        </h2>
-      </div>
+      <GoBack mode={mode} toggle={editToggle} setToggle={setEditToggle} />
       <StatusBar mode={mode} status={invoiceInfo.status} />
       <div
         className={mode === "light" ? "info-main" : "info-main info__dark--div"}
@@ -209,13 +199,24 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
               ? "buttons__button buttons--edit"
               : "buttons__button buttons--edit buttons--edit-dark"
           }
+          onClick={toggleEditModal}
         >
           Edit
         </button>
         <button className="buttons__button buttons--delete">Delete</button>
         <button className="buttons__button buttons--paid">Mark as Paid</button>
       </div>
-      <EditInvoice mode={mode} invoiceInfo={invoiceInfo} setInvoiceInfo={setInvoiceInfo} items={items} setItems={setItems}/>
+      {editToggle && (
+        <EditInvoice
+          mode={mode}
+          invoiceInfo={invoiceInfo}
+          setInvoiceInfo={setInvoiceInfo}
+          items={items}
+          setItems={setItems}
+          editToggle={editToggle}
+          setEditToggle={setEditToggle}
+        />
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import calenderImage from "../../assets/images/icon-calendar.svg";
 import arrowDown from "../../assets/images/icon-arrow-down.svg";
 import { useEffect, useState } from "react";
 import garbageCan from "../../assets/images/icon-delete.svg";
+import GoBack from "../../components/GoBack/GoBack";
 
 interface invoiceInfo {
   invoiceId: string;
@@ -39,6 +40,8 @@ interface EditInvoiceProps {
   setInvoiceInfo: any;
   items: item[];
   setItems: any;
+  editToggle: boolean;
+  setEditToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function EditInvoice({
@@ -47,6 +50,8 @@ export default function EditInvoice({
   setInvoiceInfo,
   items,
   setItems,
+  editToggle,
+  setEditToggle
 }: EditInvoiceProps) {
   const [editedInfo, setEditedInfo] = useState<invoiceInfo>({
     invoiceId: "",
@@ -85,6 +90,7 @@ export default function EditInvoice({
   };
   return (
     <form className="edit">
+      <GoBack mode={mode} toggle={editToggle} setToggle={setEditToggle}/>
       <h1 className="edit__header">Edit <span className="edit__span-grey">#</span>{invoiceInfo.invoiceId}</h1>
       <div className="edit__from">
         <h2 className="edit__subheader--purple">Bill From</h2>
