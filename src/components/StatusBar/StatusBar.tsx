@@ -1,11 +1,12 @@
 import "./StatusBar.scss";
 
 type StatusBarProps = {
-  mode: string,
-  status: string
+  mode: string;
+  status: string;
+  toggleEditModal: () => void;
 };
 
-export default function StatusBar({ mode, status }: StatusBarProps) {
+export default function StatusBar({ mode, status, toggleEditModal }: StatusBarProps) {
   return (
     <div
       className={
@@ -26,6 +27,7 @@ export default function StatusBar({ mode, status }: StatusBarProps) {
               ? "buttons__button buttons--edit"
               : "buttons__button buttons--edit buttons--edit-dark"
           }
+          onClick={toggleEditModal}
         >
           Edit
         </button>

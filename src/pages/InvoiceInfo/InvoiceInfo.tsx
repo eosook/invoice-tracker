@@ -91,7 +91,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
   return (
     <div className={mode === "light" ? "info" : "info info__dark"}>
       <GoBack mode={mode} toggle={editToggle} setToggle={setEditToggle} />
-      <StatusBar mode={mode} status={invoiceInfo.status} />
+      <StatusBar mode={mode} status={invoiceInfo.status} toggleEditModal={toggleEditModal}/>
       <div
         className={mode === "light" ? "info-main" : "info-main info__dark--div"}
       >
@@ -207,15 +207,18 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
         <button className="buttons__button buttons--paid">Mark as Paid</button>
       </div>
       {editToggle && (
-        <EditInvoice
-          mode={mode}
-          invoiceInfo={invoiceInfo}
-          setInvoiceInfo={setInvoiceInfo}
-          items={items}
-          setItems={setItems}
-          editToggle={editToggle}
-          setEditToggle={setEditToggle}
-        />
+        <div className="modal">
+          <div className="overlay"></div>
+            <EditInvoice
+              mode={mode}
+              invoiceInfo={invoiceInfo}
+              setInvoiceInfo={setInvoiceInfo}
+              items={items}
+              setItems={setItems}
+              editToggle={editToggle}
+              setEditToggle={setEditToggle}
+            />
+        </div>
       )}
     </div>
   );
