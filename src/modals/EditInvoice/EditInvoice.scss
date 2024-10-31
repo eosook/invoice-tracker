@@ -2,6 +2,12 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/fonts" as *;
 
+.modal__go-back{
+    @include tablet{
+        display: none;
+    }
+}
+
 .edit{
     background-color: white;
     top: 72px;
@@ -11,6 +17,14 @@
 
     @include tablet{
         width: 616px;
+        padding: 3rem 3.5rem;
+    }
+    @include desktop{
+        top: 0;
+        left: 70px;
+        width: 719px;
+        border-radius: 0 24px 24px 0;
+        padding-left: 4rem;
     }
     &__header{
         @include header;
@@ -23,6 +37,9 @@
             @include invoiceHeader;
             color: $purple;
             margin: 1.5rem 0;
+            @include tablet{
+                margin: 3rem 0 1.5rem;
+            }
         }
 
         &--grey{
@@ -128,6 +145,10 @@
             position: absolute;
             right: 2.5rem;
             margin-bottom: 1rem;
+
+            @include tablet{
+                right: 4.5rem;
+            }
         }
     }
 
@@ -175,3 +196,16 @@
     height: 100%;
     z-index: 0;
   }
+
+.modal-buttons{
+    display: flex;
+    justify-content: right;
+    gap: 8px;
+    &__cancel{
+        @include greyButton;
+    }
+    &__save{
+        @include purpleButton;
+        width: 138px;
+    }
+}

@@ -208,7 +208,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
       </div>
       {editToggle && (
         <div className="modal">
-          <div className="overlay"></div>
+          <div className="overlay" onClick={toggleEditModal}></div>
             <EditInvoice
               mode={mode}
               invoiceInfo={invoiceInfo}
@@ -217,6 +217,7 @@ export default function InvoiceInfo({ mode }: InvoiceInfoProps) {
               setItems={setItems}
               editToggle={editToggle}
               setEditToggle={setEditToggle}
+              toggleEditModal={toggleEditModal}
             />
         </div>
       )}

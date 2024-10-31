@@ -42,6 +42,7 @@ interface EditInvoiceProps {
   setItems: any;
   editToggle: boolean;
   setEditToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleEditModal: () => void;
 }
 
 export default function EditInvoice({
@@ -52,6 +53,7 @@ export default function EditInvoice({
   setItems,
   editToggle,
   setEditToggle,
+  toggleEditModal,
 }: EditInvoiceProps) {
   const [editedInfo, setEditedInfo] = useState<invoiceInfo>({
     invoiceId: "",
@@ -91,7 +93,9 @@ export default function EditInvoice({
   return (
     <div className="edit" id="edit">
       <form>
-        <GoBack mode={mode} toggle={editToggle} setToggle={setEditToggle} />
+        <div className="modal__go-back">
+          <GoBack mode={mode} toggle={editToggle} setToggle={setEditToggle} />
+        </div>
         <h1 className="edit__header">
           Edit <span className="edit__span-grey">#</span>
           {invoiceInfo.invoiceId}
@@ -274,6 +278,10 @@ export default function EditInvoice({
               </div>
             );
           })}
+        </div>
+        <div className="modal-buttons">
+          <button className="modal-buttons__cancel" onClick={toggleEditModal}>Cancel</button>
+          <button className="modal-buttons__save">Save Changes</button>
         </div>
       </form>
     </div>
