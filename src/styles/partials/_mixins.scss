@@ -13,10 +13,10 @@
   }
 }
 
-@mixin purpleButton() {
+@mixin purpleButton($width) {
   @include buttonfont;
   background-color: $purple;
-  width: 90px;
+  width: $width;
   height: 48px;
   border-radius: 22px;
   border: none;

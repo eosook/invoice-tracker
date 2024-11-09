@@ -4,6 +4,7 @@ import arrowDown from "../../assets/images/icon-arrow-down.svg";
 import { useEffect, useState } from "react";
 import garbageCan from "../../assets/images/icon-delete.svg";
 import GoBack from "../../components/GoBack/GoBack";
+import axios from "axios";
 
 interface invoiceInfo {
   invoiceId: string;
@@ -45,6 +46,10 @@ interface EditInvoiceProps {
   toggleEditModal: () => void;
 }
 
+interface Errors{
+  [key: string]: string;
+}
+
 export default function EditInvoice({
   mode,
   invoiceInfo,
@@ -74,6 +79,7 @@ export default function EditInvoice({
     senderaddress_postCode: "",
     senderaddress_street: "",
   });
+  const [errors, setErrors] = useState<Errors>({});
 
   useEffect(() => {
     setEditedInfo(invoiceInfo);
@@ -85,14 +91,78 @@ export default function EditInvoice({
     >
   ) => {
     const { name, value } = e.target;
+
+    // Removes red border if user types in the input box
+    setErrors({
+      ...errors,
+      [name]: ""
+    })
     setEditedInfo({
       ...editedInfo,
       [name]: value,
     });
   };
+
+  const validateForm = ():Errors => {
+    const validationErrors:Errors = {};
+
+    // Description Validation
+    if (!editedInfo.description) validationErrors.description = 'Project description is required';
+
+    // Bill From - Validations
+    if (!editedInfo.senderaddress_street) validationErrors.senderaddress_street = 'Street address is required';
+    if (!editedInfo.senderaddress_city) validationErrors.senderaddress_city = 'City is required';
+    if (!editedInfo.senderaddress_postCode) validationErrors.senderaddress_postCode = 'Post Code is required';
+    if (!editedInfo.senderaddress_country) validationErrors.senderaddress_country = 'Country is required';
+
+    // Bill To - Validations
+    if (!editedInfo.clientName) validationErrors.clientName = "Client's name is required";
+    if (!editedInfo.clientEmail) {
+      validationErrors.clientEmail = "Client's email is required";
+    } else if (!/\S+@\S+\.\S+/.test(editedInfo.clientEmail)) {
+      validationErrors.clientEmail = "Email format is invalid";
+    }
+    if (!editedInfo.clientaddress_street) validationErrors.clientaddress_street = 'Street address is required';
+    if (!editedInfo.clientaddress_city) validationErrors.clientaddress_city = 'City is required';
+    if (!editedInfo.clientaddress_postCode) validationErrors.clientaddress_postCode = 'Post Code is required';
+    if (!editedInfo.clientaddress_country) validationErrors.clientaddress_country = 'Country is required';
+
+    // Item - Validations
+    items.forEach((item, index) => {
+      if (!item.name) validationErrors[`item_name_${index}`] = 'Item name is required';
+      if (!item.quantity || isNaN(item.quantity) || item.quantity <= 0) validationErrors[`item_quantity_${index}`] = 'Quantity must be a positive number';
+      if (!item.price || isNaN(item.price) || item.price <= 0) validationErrors[`item_price_${index}`] = 'Price must be a positive number';
+    });
+    return validationErrors;
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validationErrors = validateForm();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0){
+      saveChanges();
+    }
+  };
+
+  const saveChanges = () => {
+    const updateData = async () => {
+      console.log(editedInfo);
+      const response = await axios.put(`http://localhost:8080/invoices/${invoiceInfo.invoiceId}/edit`, editedInfo, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+      console.log(response.data);
+    }
+    updateData();
+  }
+
   return (
     <div className="edit" id="edit">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="modal__go-back">
           <GoBack mode={mode} toggle={editToggle} setToggle={setEditToggle} />
         </div>
@@ -105,17 +175,18 @@ export default function EditInvoice({
           <div className="edit__div--single">
             <h3 className="edit__subheader">Street Address</h3>
             <textarea
-              className="edit__textarea"
+              className={(errors.senderaddress_street) ? "edit__textarea edit__textarea--error" : "edit__textarea"}
               name="senderaddress_street"
               value={editedInfo.senderaddress_street}
               onChange={handleChange}
             />
+            {errors.senderaddress_street && <p className="error">{errors.senderaddress_street}</p>}
           </div>
           <div className="edit__div--multi">
             <div className="edit__single-entry">
               <h3 className="edit__subheader">City</h3>
               <textarea
-                className="edit__textarea"
+                className={(errors.senderaddress_city) ? "edit__textarea edit__textarea--error" : "edit__textarea"}
                 name="senderaddress_city"
                 value={editedInfo.senderaddress_city}
                 onChange={handleChange}
@@ -124,7 +195,7 @@ export default function EditInvoice({
             <div className="edit__single-entry">
               <h3 className="edit__subheader">Post Code</h3>
               <textarea
-                className="edit__textarea"
+                className={(errors.senderaddress_postCode) ? "edit__textarea edit__textarea--error" : "edit__textarea"}
                 name="senderaddress_postCode"
                 value={editedInfo.senderaddress_postCode}
                 onChange={handleChange}
@@ -133,7 +204,7 @@ export default function EditInvoice({
             <div className="edit__single-entry--country">
               <h3 className="edit__subheader">Country</h3>
               <textarea
-                className="edit__textarea edit__textarea--country"
+                className={(errors.senderaddress_country) ? "edit__textarea edit__textarea--country edit__textarea--error" : "edit__textarea edit__textarea--country"}
                 name="senderaddress_country"
                 value={editedInfo.senderaddress_country}
                 onChange={handleChange}
@@ -236,7 +307,6 @@ export default function EditInvoice({
         <div className="edit__items">
           <h2 className="edit__subheader--grey">Item List</h2>
           {items.map((item) => {
-            console.log(item);
             return (
               <div className="edit__items-single" key={item.id}>
                 <div className="edit__div--single edit__items-name">
@@ -279,9 +349,10 @@ export default function EditInvoice({
             );
           })}
         </div>
+        <button type="button" className="edit__new-item">Add New Item</button>
         <div className="modal-buttons">
-          <button className="modal-buttons__cancel" onClick={toggleEditModal}>Cancel</button>
-          <button className="modal-buttons__save">Save Changes</button>
+          <button type="button" className="modal-buttons__cancel" onClick={toggleEditModal}>Cancel</button>
+          <button type="submit" className="modal-buttons__save">Save Changes</button>
         </div>
       </form>
     </div>

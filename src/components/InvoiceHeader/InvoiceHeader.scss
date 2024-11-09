@@ -3,10 +3,14 @@
 @use '../../styles/partials/mixins' as *;
 
 .InvoiceHeader{
-    padding: 2rem 1.5rem;
+    padding: 7rem 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include desktop{
+        padding: 2rem 1.5rem 2rem;
+    }
 
     &__buttons{
         display: flex;
@@ -47,7 +51,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        @include purpleButton;
+        @include purpleButton(150px);
 
         &--text{
             @include spartanFont(0.9375rem, bold, white, -0.25px);
